@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.1'
 
 gem 'rails', '4.1.4'
 gem 'sqlite3', group: :development
@@ -16,6 +17,7 @@ gem 'spring', group: :development
 gem 'nokogiri'
 gem 'httparty'
 gem 'base62'
+gem 'rails_12factor', group: :production
 
 gem 'rspec-rails', '~> 3.0.0', group: [:development, :test]
 group :test do
