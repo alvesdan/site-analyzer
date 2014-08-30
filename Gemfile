@@ -18,6 +18,7 @@ gem 'nokogiri'
 gem 'httparty'
 gem 'base62'
 gem 'rails_12factor', group: :production
+gem 'puma'
 
 gem 'rspec-rails', '~> 3.0.0', group: [:development, :test]
 group :test do
