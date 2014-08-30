@@ -13,7 +13,7 @@ module SiteAnalyzer
     private
 
     def protocol
-      url.match(/http[s]?:\/\//).to_s
+      url.match(/http[s]?:\/\//).to_s || 'http://'
     end
 
     def url_parts

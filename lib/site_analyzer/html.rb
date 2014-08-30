@@ -6,23 +6,32 @@ module SiteAnalyzer
       @document = Nokogiri::HTML(html)
     end
 
+    def title
+      document.css('title').text
+    end
+
+    def meta_tags
+      @meta_tags ||= ::SiteAnalyzer::Collection.new(MetaTag.tags(document))
+    end
+
     def stylesheets
-      @stylesheets ||= FileCollection.new(Stylesheet.files(url, document))
+      @stylesheets ||= ::SiteAnalyzer::Collection.new(Stylesheet.files(url, document))
     end
 
     def javascripts
-      @javascripts ||= FileCollection.new(Javascript.files(url, document))
+      @javascripts ||= ::SiteAnalyzer::Collection.new(Javascript.files(url, document))
     end
 
     def images
-      @images ||= FileCollection.new(Image.files(url, document))
+      @images ||= ::SiteAnalyzer::Collection.new(Image.files(url, document))
     end
 
-    def to_json
+    def to_h
       {
-        stylesheets: stylesheets.to_json,
-        javascripts: javascripts.to_json,
-        images: images.to_json
+        meta_tags: meta_tags.to_h,
+        stylesheets: stylesheets.to_h,
+        javascripts: javascripts.to_h,
+        images: images.to_h
       }
     end
   end

@@ -23,7 +23,7 @@ module SiteAnalyzer
       url.split('/').last
     end
 
-    def to_json
+    def to_h
       {
         url: url,
         name: name

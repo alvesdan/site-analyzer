@@ -1,5 +1,5 @@
 module SiteAnalyzer
-  class FileCollection
+  class Collection
     include Enumerable
 
     def initialize(members)
@@ -10,8 +10,8 @@ module SiteAnalyzer
       @members.each(&block)
     end
 
-    def to_json
-      @members.map(&:to_json)
+    def to_h
+      @members.map(&:to_h)
     end
   end
 end
