@@ -1,0 +1,74 @@
+.show-analysis {
+  padding: 40px 0 60px;
+  .container {
+    max-width: 700px;
+  }
+}
+
+@mixin base-box {
+  position: relative;
+  display: block;
+  height: 120px;
+  margin-bottom: 20px;
+  padding: 8px 10px;
+  background: #fff;
+  border-radius: $border-radius-base;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  color: #999;
+  overflow-y: scroll;
+  word-wrap: break-word;
+}
+
+@mixin box-icon($content) {
+  &:after {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    content: $content;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #eee;
+  }
+}
+
+@mixin data-url-clickable {
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+section {
+  h2 {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #666;
+  }
+}
+
+.meta-tags {
+  .meta-tag {
+    @include base-box;
+  }
+}
+
+.stylesheets {
+  .stylesheet {
+    @include base-box;
+    @include box-icon('css');
+    @include data-url-clickable;
+    overflow-y: hidden;
+  }
+}
+
+.javascripts {
+  .javascript {
+    @include base-box;
+    @include box-icon('js');
+    @include data-url-clickable;
+    overflow-y: hidden;
+  }
+}
