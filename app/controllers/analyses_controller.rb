@@ -40,7 +40,7 @@ class AnalysesController < ApplicationController
   helper_method :html_document
 
   def validate_html
-    return if html_body =~ /<html/ && html_body =~ /<\/html>/
+    return if html_body =~ /html/ && html_body =~ /<\/html>/
     flash[:error] = "Couldn't read \"#{analysis.url}\""
     analysis.destroy
     redirect_to root_path
