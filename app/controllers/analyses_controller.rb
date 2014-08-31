@@ -10,7 +10,7 @@ class AnalysesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: html_document.to_h }
-    end # if stale?(analysis)
+    end if stale?(analysis)
   end
 
   protected
