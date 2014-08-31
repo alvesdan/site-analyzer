@@ -36,7 +36,7 @@ module SiteAnalyzer
     private
 
     def document
-      @document ||= HTTParty.get(url).body
+      @document ||= HTTParty.get(url).body rescue ''
     end
 
     def document_colors

@@ -8,7 +8,7 @@ module SiteAnalyzer
     end
 
     def formatted_url
-      return file_path if file_path =~ /\A\/\//
+      return "http:#{file_path}" if file_path =~ /\A\/\//
       return ::File.join(protocol, domain(url), file_path) if file_path =~ /\A\/\w/
       ::File.join(protocol, clean_url, clean_path)
     end
@@ -16,7 +16,9 @@ module SiteAnalyzer
     private
 
     def normalize_url(url)
-      url.gsub(/\/[\w]+\.(html|htm|php|asp|aspx)\z/, '')
+      url.gsub!(/\/[\w]+\.(html|htm|php|asp|aspx)\z/, '')
+      url.gsub!(/#[\w-]+\z/, '')
+      url
     end
 
     def domain(url)
