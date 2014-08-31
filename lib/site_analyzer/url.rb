@@ -1,5 +1,6 @@
 module SiteAnalyzer
   class Url
+    require 'uri'
     attr_reader :url, :file_path
     def initialize(url, file_path)
       @url = normalize_url(url)
@@ -8,13 +9,18 @@ module SiteAnalyzer
 
     def formatted_url
       return file_path if file_path =~ /\A\/\//
+      return ::File.join(protocol, domain(url), file_path) if file_path =~ /\A\/\w/
       ::File.join(protocol, clean_url, clean_path)
     end
 
     private
 
     def normalize_url(url)
-      url.gsub(/\/.*\.[a-z]{3,4}/)
+      url.gsub(/\/[\w]+\.(html|htm|php|asp|aspx)\z/, '')
+    end
+
+    def domain(url)
+      URI.parse(url).host
     end
 
     def protocol

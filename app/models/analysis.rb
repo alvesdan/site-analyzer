@@ -4,9 +4,14 @@ class Analysis < ActiveRecord::Base
   validates :url, presence: true
   validates :url, url: true
   after_create :set_shortened_url
+  before_validation :normalize_url
 
   def to_param
     shortened_url
+  end
+
+  def normalize_url
+    self.url = url.gsub(/\/\z/, '') if url.present?
   end
 
   private
