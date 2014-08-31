@@ -31,6 +31,17 @@
             .stylesheet{ data: { url: stylesheet.url }}
               = stylesheet.name
 
+  %section.colors
+    .container
+      .row
+        .col-sm-12
+          %h2 Colors
+      .row
+        - html_document.colors.each do |color|
+          .col-sm-2.col-xs-4
+            .color
+              = "##{color}"
+
   %section.javascripts
     .container
       .row

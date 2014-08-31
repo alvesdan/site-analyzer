@@ -19,8 +19,10 @@ module SiteAnalyzer
       @attributes = attributes
     end
 
-    def document
-      @document ||= HTTParty.get(url).body
+    def pallete
+      document_colors.map do |color|
+        parse_color(color, type: 'color')
+      end
     end
 
     def to_h
@@ -29,6 +31,24 @@ module SiteAnalyzer
         media: attributes['media'],
         rel: attributes['rel']
       }
+    end
+
+    private
+
+    def document
+      @document ||= HTTParty.get(url).body
+    end
+
+    def document_colors
+      @document_colors ||= document.scan(/(color:[\s]?#[a-zA-Z0-9]+);/i).to_a.flatten.uniq
+    end
+
+    def parse_color(color, type: 'color')
+      case type
+      when 'background'
+      else
+        color.gsub(/color:[\s]?#/, '').downcase
+      end
     end
   end
 end

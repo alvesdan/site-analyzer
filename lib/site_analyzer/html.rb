@@ -1,5 +1,7 @@
 module SiteAnalyzer
   class HTML
+    include Colors
+    
     attr_reader :url, :document
     def initialize(url = '', html = '')
       @url = url
@@ -24,6 +26,10 @@ module SiteAnalyzer
 
     def images
       @images ||= ::SiteAnalyzer::Collection.new(Image.files(url, document))
+    end
+
+    def colors
+      @colors ||= order_colors(stylesheets.map(&:pallete).flatten)
     end
 
     def to_h
