@@ -1,6 +1,8 @@
 class AnalysesController < ApplicationController
   respond_to :html, :json
 
+  before_action :validate_html, only: [:show]
+
   def create
     analysis.save
     respond_with analysis, location: analysis_path(analysis)
@@ -16,7 +18,7 @@ class AnalysesController < ApplicationController
   protected
 
   def analysis
-    @analysis ||= params[:id] ? Analysis.find(params[:id]) : Analysis.find_or_create_by(url: analysis_params[:url])
+    @analysis ||= params[:id] ? Analysis.find_by(shortened_url: params[:id]) : Analysis.find_or_create_by(url: analysis_params[:url])
   end
   helper_method :analysis
 
@@ -36,4 +38,11 @@ class AnalysesController < ApplicationController
     @html_document ||= SiteAnalyzer::HTML.new(analysis.url, html_body)
   end
   helper_method :html_document
+
+  def validate_html
+    return if html_body =~ /<html/ && html_body =~ /<\/html>/
+    flash[:error] = "Couldn't read \"#{analysis.url}\""
+    analysis.destroy
+    redirect_to root_path
+  end
 end

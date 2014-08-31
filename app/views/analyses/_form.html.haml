@@ -1,3 +1,6 @@
 = form_for analysis do |f|
   .form-group
-    = f.text_field :url, class: 'form-control', placeholder: 'What URL you want to analyze?'
+    = f.text_field :url,
+    class: 'form-control',
+    placeholder: 'What site do you want to analyze?',
+    autocomplete: 'off'
