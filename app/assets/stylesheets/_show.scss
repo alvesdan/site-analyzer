@@ -74,5 +74,6 @@ section {
 .colors {
   .color {
     @include base-box;
+    height: 60px;
   }
 }
