@@ -1,7 +1,7 @@
 module SiteAnalyzer
   class HTML
     include Colors
-    
+
     attr_reader :url, :document
     def initialize(url = '', html = '')
       @url = url
@@ -29,7 +29,7 @@ module SiteAnalyzer
     end
 
     def colors
-      @colors ||= order_colors(stylesheets.map(&:pallete).flatten)
+      @colors ||= order_colors(stylesheets.map(&:pallete).flatten.uniq)
     end
 
     def to_h

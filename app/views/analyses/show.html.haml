@@ -53,4 +53,15 @@
             .javascript{ data: { url: javascript.url }}
               = javascript.name
 
+  %section.images
+    .container
+      .row
+        .col-sm-12
+          %h2 Images
+      .row
+        - html_document.images.each do |image|
+          .col-sm-2.col-xs-4
+            .image{ data: { url: image.url }}
+              .image-wrapper{ data: { image: image.url }}
+
   = render 'footer'

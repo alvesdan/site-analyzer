@@ -71,6 +71,26 @@ section {
   }
 }
 
+.images {
+  .image {
+    @include base-box;
+    @include box-icon('img');
+    @include data-url-clickable;
+    .image-wrapper {
+      width: 80%;
+      height: 60px;
+      margin: 5px auto;
+      background-size: cover;
+      background-position: center center;
+      border-radius: $border-radius-base;
+      filter: grayscale(100%);
+      &:hover {
+        filter: grayscale(0%)
+      }
+    }
+  }
+}
+
 .colors {
   .color {
     @include base-box;

@@ -2,8 +2,10 @@ module SiteAnalyzer
   class Image < ::SiteAnalyzer::File
 
     def self.files(url, html)
-      valid_files(html).map do |image|
-        new(file_url(url, image.to_h['src']))
+      valid_files(html).map { |image|
+        image.to_h['src']
+      }.uniq.map do |src|
+        new(file_url(url, src))
       end
     end
 

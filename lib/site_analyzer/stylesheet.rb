@@ -47,7 +47,7 @@ module SiteAnalyzer
       case type
       when 'background'
       else
-        color.gsub(/color:[\s]?#/, '').downcase
+        color.gsub(/#?color:[\s]?#/i, '').downcase
       end
     end
   end

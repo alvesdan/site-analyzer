@@ -3,11 +3,11 @@ $ ->
     title: ->
       $(this).text()
 
-  $('.stylesheet, .javascript').tooltip
+  $('.stylesheet, .javascript, .image').tooltip
     title: ->
       $(this).data('url')
 
-  $('.stylesheet, .javascript').on 'click', ->
+  $('.stylesheet, .javascript, .image').on 'click', ->
     url = $(this).data('url')
     window.open(url, '_blank')
 
@@ -18,3 +18,9 @@ $ ->
   $('.color').tooltip
     title: ->
       $(this).text()
+
+  $('.image-wrapper').each ->
+    imageUrl = $(this).data('image')
+    console.log(imageUrl)
+    # if imageUrl?
+    $(this).css('background-image', "url(#{imageUrl})")
