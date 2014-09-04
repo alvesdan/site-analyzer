@@ -29,7 +29,7 @@ class AnalysesController < ApplicationController
 
   def html_body
     @html_body ||= Rails.cache.fetch("#{analysis.id}-body", expires_in: 1.hour) do
-      HTTParty.get(analysis.url).body
+      HTTParty.get(analysis.url, headers: {"User Agent" => user_agent}).body
     end
   end
 
@@ -44,5 +44,9 @@ class AnalysesController < ApplicationController
     flash[:error] = "Couldn't read \"#{analysis.url}\""
     analysis.destroy
     redirect_to root_path
+  end
+
+  def user_agent
+    request.env['HTTP_USER_AGENT'] || request.user_agent
   end
 end
