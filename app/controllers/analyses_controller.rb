@@ -29,7 +29,7 @@ class AnalysesController < ApplicationController
 
   def html_body
     @html_body ||= Rails.cache.fetch("#{analysis.id}-body", expires_in: 1.hour) do
-      HTTParty.get(analysis.url, headers: {"User Agent" => user_agent}).body
+      HTTParty.get(analysis.url, headers: { "User Agent" => user_agent }).body
     end
   end
 
@@ -40,7 +40,7 @@ class AnalysesController < ApplicationController
   helper_method :html_document
 
   def validate_html
-    return if html_body =~ /html/ && html_body =~ /<\/html>/i
+    return if html_document.valid?
     flash[:error] = "Couldn't read \"#{analysis.url}\""
     analysis.destroy
     redirect_to root_path

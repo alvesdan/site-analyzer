@@ -4,8 +4,14 @@ module SiteAnalyzer
 
     attr_reader :url, :document
     def initialize(url = '', html = '')
+      @raw = html
       @url = url
       @document = Nokogiri::HTML(html)
+    end
+    
+    # TODO: Improve HTML validation
+    def valid?
+      @raw =~ /html/ && @raw =~ /<\/html>/i
     end
 
     def title
