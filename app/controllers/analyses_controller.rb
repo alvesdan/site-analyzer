@@ -29,12 +29,11 @@ class AnalysesController < ApplicationController
 
   def html_body
     @html_body ||= Rails.cache.fetch("#{analysis.id}-body", expires_in: 1.hour) do
-      HTTParty.get(analysis.url, headers: { "User Agent" => user_agent }).body
+      HTTParty.get(analysis.url, headers: { "User-Agent" => user_agent }).body
     end
   end
 
   def html_document
-    return @html_document if @html_document
     @html_document ||= SiteAnalyzer::HTML.new(analysis.url, html_body)
   end
   helper_method :html_document
