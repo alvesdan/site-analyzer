@@ -5,7 +5,7 @@ class AnalysesController < ApplicationController
 
   def create
     analysis.save
-    respond_with analysis, location: analysis_path(analysis)
+    respond_with analysis
   end
 
   def show
@@ -18,7 +18,7 @@ class AnalysesController < ApplicationController
   protected
 
   def analysis
-    @analysis ||= params[:id] ? Analysis.find_by(shortened_url: params[:id]) : Analysis.find_or_create_by(url: analysis_params[:url])
+    @analysis ||= params[:id] ? Analysis.find_by(shortened_url: params[:id]) : Analysis.find_or_initialize_by(url: analysis_params[:url])
   end
   helper_method :analysis
 
