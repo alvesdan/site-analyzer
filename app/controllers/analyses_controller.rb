@@ -5,7 +5,6 @@ class AnalysesController < ApplicationController
 
   def create
     analysis.save
-    respond_with analysis
   end
 
   def show

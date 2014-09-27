@@ -1,0 +1,10 @@
+$('#analysis_url').tooltip('destroy');
+<% if analysis.valid? %>
+  Turbolinks.visit('<%= analysis_path(analysis) %>');
+<% else %>
+  $('#analysis_url').tooltip({
+    trigger: 'manual',
+    title: '<%= analysis.errors.full_messages.join(", ").html_safe %>'
+  });
+  $('#analysis_url').tooltip('show');
+<% end %>
